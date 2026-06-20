@@ -1,0 +1,243 @@
+<!-- templates/base.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>{% block title %}AirMenu{% endblock %}</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --red: #E23744;
+      --charcoal: #1B1B1B;
+      --white: #ffffff;
+      --soft-white: #e8e8e8;
+    }
+
+    html, body {
+      margin: 0;
+      background: var(--charcoal);
+      color: var(--white);
+      font-family: Inter, system-ui, Arial;
+    }
+
+    /* ------------------ NAVBAR ------------------ */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.55);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      backdrop-filter: blur(8px);
+      z-index: 50;
+    }
+    .logo {
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--red);
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      margin-left: 22px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.08);
+    }
+    nav a.active {
+      color: var(--red);
+      border-bottom: 2px solid var(--red);
+    }
+
+    main {
+      padding: 36px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 70vh;
+    }
+
+    /* ------------------ CHOBANI STYLE FOOTER ------------------ */
+    footer {
+      background: #0B0F0F; /* Deep charcoal-greenish look like sample */
+      padding: 50px 70px;
+      color: var(--soft-white);
+      margin-top: 60px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      margin-right: 22px;
+      text-decoration: none;
+      color: var(--soft-white);
+      opacity: 0.85;
+      font-size: 15px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-news h4 {
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    /* Make subscribe button small */
+.small-btn {
+  padding: 8px 14px !important;
+  font-size: 14px !important;
+}
+
+/* Social icons */
+.social i {
+  font-size: 22px;
+  margin-left: 14px;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: 0.2s;
+}
+
+.social i:hover {
+  opacity: 1;
+  color: var(--red);
+}
+
+
+    footer hr {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      margin: 30px 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .legal a {
+      margin-right: 20px;
+      font-size: 14px;
+      color: var(--soft-white);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+    .legal a:hover {
+      opacity: 1;
+    }
+
+    .social img {
+      width: 24px;
+      margin-left: 12px;
+      opacity: 0.75;
+      cursor: pointer;
+    }
+    .social img:hover {
+      opacity: 1;
+    }
+
+    @media(max-width:900px) {
+      main { padding: 20px; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="logo">AirMenu</div>
+
+    <nav>
+      <a href="{{ url_for('home') }}" class="{% if request.path=='/' %}active{% endif %}">Home</a>
+      <a href="{{ url_for('about') }}" class="{% if request.path=='/about' %}active{% endif %}">About</a>
+      <a href="{{ url_for('contact') }}" class="{% if request.path=='/contact' %}active{% endif %}">Contact</a>
+      <a href="{{ url_for('airmenu') }}" class="{% if request.path=='/airmenu' %}active{% endif %}">AirMenu</a>
+    </nav>
+  </header>
+
+
+  <!-- MAIN CONTENT -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <!-- TOP PART -->
+    <div class="footer-top">
+
+      <!-- LEFT -->
+      <div>
+        <h2 style="color:var(--white);font-size:26px;margin-bottom:15px;">AirMenu</h2>
+
+        <div class="footer-links">
+          <a href="{{ url_for('about') }}">About Us</a>
+          <a href="{{ url_for('home') }}">Careers</a>
+          <a href="#">Press</a>
+          <a href="{{ url_for('contact') }}">Customer Care</a>
+          <a href="#">Foodservice</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Newsletter -->
+      <div class="footer-news">
+        <h4>Get the freshest AirMenu updates</h4>
+
+        <div class="subscribe-box">
+          <input type="email" placeholder="Your email here">
+          <button class="small-btn">Subscribe</button>
+
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <!-- BOTTOM PART -->
+    <div class="footer-bottom">
+
+      <div class="legal">
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Transparency in Supply Chains</a>
+      </div>
+
+      <div class="social">
+        <div class="social">
+  <i class="bi bi-facebook"></i>
+  <i class="bi bi-instagram"></i>
+  <i class="bi bi-twitter"></i>
+  <i class="bi bi-youtube"></i>
+</div>
+
+      </div>
+
+    </div>
+
+    <div style="margin-top:20px;font-size:14px;opacity:0.7;">
+     
+    </div>
+
+  </footer>
+
+</body>
+</html>

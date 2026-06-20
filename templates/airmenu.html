@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirMenu – Touchless Ordering</title>
+
+    <style>
+        :root{
+            --red:#E23744;
+            --charcoal:#1B1B1B;
+            --dark:#0E0E0E;
+            --white:#ffffff;
+            --soft:#e8e8e8;
+        }
+
+        body{
+            margin:0;
+            padding:0;
+            background:var(--charcoal);  /* Updated */
+            font-family: Poppins, sans-serif;
+            color:var(--white);          /* Updated */
+            text-align:center;
+            overflow-x:hidden;
+        }
+
+        header{
+            padding:22px 0;
+            font-size:30px;
+            font-weight:600;
+            color:var(--red);           /* Updated */
+            border-bottom:1px solid rgba(255,255,255,0.12);
+            background:rgba(0,0,0,0.55); /* Matches other pages */
+            backdrop-filter:blur(8px);
+            position:sticky;
+            top:0;
+            z-index:20;
+        }
+
+        .subtext{
+            margin-top:16px;
+            font-size:19px;
+            color:var(--soft);          /* Updated */
+            opacity:0.85;
+        }
+
+        .processing{
+            margin-top:8px;
+            font-size:17px;
+            color:#ffd65e;             /* Slight gold highlight */
+            font-weight:600;
+        }
+
+        /* Camera Box */
+        .cam-container{
+            width:92%;
+            max-width:1280px;
+            margin:24px auto 60px;
+            border-radius:14px;
+            background:#000;            /* Keep pure black */
+            position:relative;
+            box-shadow:0 0 25px rgba(226,55,68,0.35); /* Red glow */
+            border:2px solid rgba(226,55,68,0.45);     /* Red toned */
+            overflow:hidden;
+        }
+
+        img.stream{
+            width:100%;
+            display:block;
+            background:black;
+        }
+
+        /* Yellow Hover Target Box (for finger) */
+        .hover-box{
+            position:absolute;
+            width:120px;
+            height:120px;
+            border:4px solid var(--red);        /* Updated from yellow */
+            border-radius:14px;
+            pointer-events:none;
+            display:none;
+            z-index:99;
+            box-shadow:0 0 18px rgba(226,55,68,0.8); /* Red glow */
+        }
+
+        @media (max-width:600px){
+            header{ font-size:22px; }
+            .subtext{ font-size:15px; }
+        }
+    </style>
+
+    <script>
+        // OPTIONAL: Live highlight box (red theme)
+        function updateHover(x, y){
+            const box = document.getElementById("hoverBox");
+            box.style.left = (x - 60) + "px";
+            box.style.top = (y - 60) + "px";
+            box.style.display = "block";
+        }
+
+        function hideHover(){
+            document.getElementById("hoverBox").style.display = "none";
+        }
+    </script>
+
+</head>
+
+<body>
+
+<header>AirMenu – Gesture Control</header>
+
+<div class="subtext">Use hand gestures to select menu items</div>
+<div class="processing">Move your hand in front of the camera</div>
+
+<div class="cam-container">
+    <img src="{{ url_for('video_feed') }}" class="stream">
+
+    <div id="hoverBox" class="hover-box"></div>
+</div>
+
+</body>
+</html>

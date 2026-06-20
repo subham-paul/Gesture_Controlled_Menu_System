@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+{% block title %}Home — AirMenu{% endblock %}
+{% block content %}
+
+<style>
+
+/* ---------------------- THEME ---------------------- */
+:root {
+    --red: #E23744;
+    --charcoal: #1B1B1B;
+    --white: #FFFFFF;
+    --soft-white: #FFF8F6;
+    --grey: #F2F2F2;
+}
+
+/* ---------------------- HERO SECTION ---------------------- */
+.hero {
+    position: relative;
+    height: 85vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero iframe {
+    position: absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter: brightness(0.55);
+    border: none;
+}
+
+.hero-overlay {
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.55));
+}
+
+.hero-content {
+    position:relative;
+    z-index:3;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:var(--white);
+    padding:20px;
+    animation: fadeUp 1.2s ease forwards;
+    opacity:0;
+}
+
+@keyframes fadeUp {
+    from {opacity:0; transform:translateY(30px);}
+    to   {opacity:1; transform:translateY(0);}
+}
+
+.hero-content h1 {
+    font-size:3.6rem;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.hero-content p {
+    font-size:1.3rem;
+    max-width:600px;
+    opacity:0.92;
+    margin-bottom:20px;
+}
+
+.hero-btn {
+    padding:14px 34px;
+    background:var(--red);
+    color:var(--white);
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:1.2rem;
+    font-weight:700;
+    transition:0.3s;
+    box-shadow:0 0 15px rgba(226,55,68,0.55);
+}
+
+.hero-btn:hover {
+    transform: scale(1.07);
+    box-shadow:0 0 25px rgba(226,55,68,0.9);
+}
+
+/* ---------------------- ABOUT SECTION ---------------------- */
+.about {
+    padding:60px 40px;
+    display:flex;
+    gap:40px;
+    align-items:center;
+    justify-content:center;
+    background:var(--soft-white);
+}
+
+.about-text {
+    max-width:550px;
+}
+
+.about-text h2 {
+    font-size:2.6rem;
+    color:var(--red);
+    margin-bottom:10px;
+}
+
+.about-text p {
+    font-size:1.1rem;
+    color:var(--charcoal);
+    opacity:0.85;
+}
+
+.about img {
+    width:260px;
+    border-radius:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,0.15);
+}
+
+/* ---------------------- VIDEO CARDS ---------------------- */
+.food-section-title {
+    margin-top:50px;
+    text-align:center;
+    font-size:2.4rem;
+    color:var(--red);
+    font-weight:700;
+}
+
+.food-grid {
+    padding:40px 20px 70px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+    gap:26px;
+}
+
+.food-card {
+    background:var(--white);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 18px rgba(0,0,0,0.10);
+    transition:0.3s ease;
+}
+
+.food-card:hover {
+    transform:translateY(-8px);
+    box-shadow:0 8px 28px rgba(0,0,0,0.20);
+}
+
+.food-card iframe {
+    width:100%;
+    height:200px;
+    border:none;
+}
+
+.food-info {
+    padding:14px;
+    color:var(--charcoal);
+}
+
+.food-info h3 {
+    margin-bottom:4px;
+    color:var(--red);
+}
+
+</style>
+
+<!-- ---------------------- HERO SECTION ---------------------- -->
+<div class="hero">
+    <iframe 
+        src="https://www.youtube.com/embed/xPPLbEFbCAo?autoplay=1&mute=1&loop=1&playlist=xPPLbEFbCAo"
+        allow="autoplay; encrypted-media"
+    ></iframe>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Order Food Without Touch</h1>
+        <p>Experience next-gen gesture-controlled dining — clean, fast, futuristic.</p>
+
+        <a href="{{ url_for('airmenu') }}">
+            <button class="hero-btn">Start Air Menu</button>
+        </a>
+    </div>
+</div>
+
+<!-- ---------------------- ABOUT ---------------------- -->
+<div class="about">
+    <img src="https://marketplace.canva.com/EAFYecj_1Sc/2/0/1600w/canva-cream-and-black-simple-elegant-catering-food-logo-ecSS48m_S3Q.jpg">
+
+    <div class="about-text">
+        <h2>About Our Restaurant</h2>
+        <p>
+            We bring a modern dining experience powered by air gestures.  
+            No touch → more hygiene, quicker orders, and a premium futuristic feel.  
+            Powered by AI-driven hand tracking for a seamless food ordering experience.
+        </p>
+    </div>
+</div>
+
+<!-- ---------------------- FOOD CARDS ---------------------- -->
+<h2 class="food-section-title">Popular Categories</h2>
+
+<div class="food-grid">
+
+    <!-- DESSERTS (UPDATED) -->
+    <div class="food-card">
+        <iframe 
+            src="https://www.youtube.com/embed/YpwoFV2tG10?autoplay=1&mute=1&loop=1&playlist=YpwoFV2tG10"
+            allow="autoplay"
+        ></iframe>
+        <div class="food-info">
+            <h3>Desserts</h3>
+            <p>Cakes • Donuts • Brownies</p>
+        </div>
+    </div>
+
+    <!-- STARTERS -->
+    <div class="food-card">
+        <iframe 
+            src="https://www.youtube.com/embed/lHOmgNapV78?autoplay=1&mute=1&loop=1&playlist=lHOmgNapV78"
+            allow="autoplay"
+        ></iframe>
+        <div class="food-info">
+            <h3>Starters</h3>
+            <p>Crispy snacks • Finger foods</p>
+        </div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="food-card">
+        <iframe 
+            src="https://www.youtube.com/embed/sZbTObGG_L4?autoplay=1&mute=1&loop=1&playlist=sZbTObGG_L4"
+            allow="autoplay"
+        ></iframe>
+        <div class="food-info">
+            <h3>Drinks</h3>
+            <p>Coffee • Mojito • Shakes</p>
+        </div>
+    </div>
+
+    <!-- SPECIAL COMBOS (UPDATED) -->
+    <div class="food-card">
+        <iframe 
+            src="https://www.youtube.com/embed/l-PAnby_kV4?autoplay=1&mute=1&loop=1&playlist=l-PAnby_kV4"
+            allow="autoplay"
+        ></iframe>
+        <div class="food-info">
+            <h3>Special Combos</h3>
+            <p>Perfect meal combinations</p>
+        </div>
+    </div>
+
+    <!-- MOMOS (UPDATED) -->
+    <div class="food-card">
+        <iframe 
+            src="https://www.youtube.com/embed/c5PPoROh6QQ?autoplay=1&mute=1&loop=1&playlist=c5PPoROh6QQ"
+            allow="autoplay"
+        ></iframe>
+        <div class="food-info">
+            <h3>Momos</h3>
+            <p>Chatpata food</p>
+        </div>
+    </div>
+
+    <!-- SIZZLER -->
+    <div class="food-card">
+        <iframe 
+            src="https://www.youtube.com/embed/FABki_TS0hU?autoplay=1&mute=1&loop=1&playlist=FABki_TS0hU"
+            allow="autoplay"
+        ></iframe>
+        <div class="food-info">
+            <h3>Sizzlers</h3>
+            <p>Steamy hot combos</p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
